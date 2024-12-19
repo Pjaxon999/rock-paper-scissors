@@ -5,4 +5,58 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #6A0DAD;
+    background-image: linear-gradient(to bottom right,#1E3A5F , #6A0DAD);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #F8F8F8;
+    text-align: center;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 48px;
+    font-weight: 100;
+    color: #FF4500;
+}
+
+h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #F8F8F8;
+}
+
+p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #F8F8F8;
+}
+
+button {
+    border: none;
+    font-size: 32px;
+    margin: 10px;
+}
+
+.gameUi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#rock {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: #36454F;
+    padding-bottom: 4px;
+}
+
+#paper {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #FFFFF0;
+    padding-bottom: 4px;
+}
+
+#scissors {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #4682B4;
+    padding-top: 6px;
 }

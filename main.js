@@ -113,11 +113,13 @@ function evalWinner(){
     if (playerScore > computerScore){
         uiDiv.style.display = "none";
         let victoryMessage = document.createElement("h2");
+        victoryMessage.setAttribute("style", "color: green; text-align: center;");
         victoryMessage.textContent = "Congratulations! You acheived supreme victory over the machine race!";
         document.body.appendChild(victoryMessage);
     } else {
         uiDiv.style.display = "none";
         let defeatMessage = document.createElement("h2");
+        defeatMessage.setAttribute("style", "color: red; text-align: center;");
         defeatMessage.textContent = "Sadly, the machine race has triumphed over mankind. What fate have you doomed us to?";
         document.body.appendChild(defeatMessage);
     }    
