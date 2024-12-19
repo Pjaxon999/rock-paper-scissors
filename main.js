@@ -2,10 +2,8 @@
 console.log("Testing! 123!");
 
 //Declaring constants for later use with DOM methods
-const roundCount = document.getElementById("roundCounter");
-const playerScore = document.getElementById("playerScore");
-const computerScore = document.getElementById("computerScore");
 const resultTracker = document.getElementById("resultTracker");
+const uiDiv = document.querySelector(".gameUi")
 
 // Getting an RPS choice from the computer
 // write a function that randomly returns rock paper or scissors
@@ -22,6 +20,37 @@ function getComputerChoice() {
     }
 }
 
+//Initialize variables for keeping score and the round number
+let roundCount = 1;
+let playerScore = 0;
+let computerScore = 0;
+
+function playerScoreUp() {
+    if (playerScore < 4){
+    playerScore++;
+    document.getElementById("playerScore").textContent = playerScore;
+    } else {
+    playerScore++;
+    document.getElementById("playerScore").textContent = playerScore;
+    evalWinner();
+    }
+}
+
+function computerScoreUp() {
+    if (computerScore < 4){
+    computerScore++;
+    document.getElementById("computerScore").textContent = computerScore;
+    } else {
+    computerScore++;
+    document.getElementById("computerScore").textcontent = computerScore;
+    evalWinner();
+    }
+}
+
+function roundIncreaser() {
+    roundCount++;
+    document.getElementById("roundCount").textContent = roundCount;
+}
 
 // Get RPS choice from Human player
 // valid choices are "Rock" , "Paper" , "Scissors"
@@ -49,41 +78,49 @@ function playRound (humanChoice) {
     if (humanSelection == computerSelection) {
         resultTracker.textContent = `Draw! ${humanSelection} and ${computerSelection} are the same!`;
         console.log("Draw");
+        
     } else if (humanSelection == "rock" && computerSelection == "paper"){
         resultTracker.textContent = `You lose! ${computerSelection} covers ${humanSelection}.`;
         console.log("Lose");
+        computerScoreUp();
     } else if (humanSelection == "rock" && computerSelection == "scissors"){
         resultTracker.textContent = `You win! ${humanSelection} smashes ${computerSelection}!`;
         console.log("Win");
+        playerScoreUp();
     } else if (humanSelection == "paper" && computerSelection == "rock"){
         resultTracker.textContent = `You win! ${humanSelection} covers ${computerSelection}.`;
         console.log("Win");
-        
+        playerScoreUp();
     } else if (humanSelection == "paper" && computerSelection == "scissors"){
         resultTracker.textContent = `You lose! ${computerSelection} cuts ${humanSelection}!`;
         console.log("Lose")
-        
+        computerScoreUp();
     } else if (humanSelection == "scissors" && computerSelection == "rock"){
         resultTracker.textContent = `You lose! ${computerSelection} smashes ${humanSelection}!`;
         console.log("Lose");
-        
+        computerScoreUp();
     } else if (humanSelection == "scissors" && computerSelection == "paper"){
         resultTracker.textContent = `You win! ${humanSelection} cuts ${computerSelection}!`;
         console.log("Win");
-        
+        playerScoreUp();
     } else {alert("something has gone horribly wrong, try again!")}
+    roundIncreaser();
 }
 
 
 //Evaluate a winner based on the score after 5 rounds
 function evalWinner(){
-    if (humanScore > computerScore){
-        alert("Congratulations! You acheived supreme victory over the machine race!")
-    } else if (humanScore < computerScore){
-        alert("Sadly, the machine race has triumphed over mankind. What fate have you doomed us to?")
-    } else if (humanScore == computerScore){
-        alert("A draw? But how are we ever going to settle this whole man vs. machine thing?!")
-    }
+    if (playerScore > computerScore){
+        uiDiv.style.display = "none";
+        let victoryMessage = document.createElement("h2");
+        victoryMessage.textContent = "Congratulations! You acheived supreme victory over the machine race!";
+        document.body.appendChild(victoryMessage);
+    } else {
+        uiDiv.style.display = "none";
+        let defeatMessage = document.createElement("h2");
+        defeatMessage.textContent = "Sadly, the machine race has triumphed over mankind. What fate have you doomed us to?";
+        document.body.appendChild(defeatMessage);
+    }    
 }
     
 //Event listeners for buttons
