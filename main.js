@@ -1,6 +1,11 @@
 //To test linking JS externally
-console.log("Testing! 123!")
+console.log("Testing! 123!");
 
+//Declaring constants for later use with DOM methods
+const roundCount = document.getElementById("roundCounter");
+const playerScore = document.getElementById("playerScore");
+const computerScore = document.getElementById("computerScore");
+const resultTracker = document.getElementById("resultTracker");
 
 // Getting an RPS choice from the computer
 // write a function that randomly returns rock paper or scissors
@@ -21,10 +26,16 @@ function getComputerChoice() {
 // Get RPS choice from Human player
 // valid choices are "Rock" , "Paper" , "Scissors"
 // add case insensitivity! 
-function getHumanChoice() {
-    let playerString = prompt("Rock, Paper, or Scissors?")
-    let lowerCaseString = playerString.toLowerCase();
-    return lowerCaseString;
+function getHumanChoice(event) {
+    const buttonId = event.target.id;
+    if(buttonId == 'rock') {
+        playRound("rock");
+    } else if (buttonId == 'paper') {
+        playRound("paper");
+    } else if (buttonId == 'scissors') {
+        playRound("scissors");
+    }
+    
 }
 
 
@@ -32,36 +43,34 @@ function getHumanChoice() {
 // Plays a single round of rock paper scissors ()
 // Increments the round winner's score
 // logs a winner announcement
-function playRound (humanChoice, computerChoice) {    
-    let humanSelection = getHumanChoice();
+function playRound (humanChoice) {    
+    let humanSelection = humanChoice;
     let computerSelection = getComputerChoice();
     if (humanSelection == computerSelection) {
-        alert(`Draw! ${humanSelection} and ${computerSelection} are the same!`)
+        resultTracker.textContent = `Draw! ${humanSelection} and ${computerSelection} are the same!`;
         console.log("Draw");
     } else if (humanSelection == "rock" && computerSelection == "paper"){
-        alert(`You lose! ${computerSelection} covers ${humanSelection}.`)
+        resultTracker.textContent = `You lose! ${computerSelection} covers ${humanSelection}.`;
         console.log("Lose");
-        computerScore++;
     } else if (humanSelection == "rock" && computerSelection == "scissors"){
-        alert(`You win! ${humanSelection} smashes ${computerSelection}!`)
+        resultTracker.textContent = `You win! ${humanSelection} smashes ${computerSelection}!`;
         console.log("Win");
-        humanScore++;
     } else if (humanSelection == "paper" && computerSelection == "rock"){
-        alert(`You win! ${humanSelection} covers ${computerSelection}.`)
+        resultTracker.textContent = `You win! ${humanSelection} covers ${computerSelection}.`;
         console.log("Win");
-        humanScore++;
+        
     } else if (humanSelection == "paper" && computerSelection == "scissors"){
-        alert(`You lose! ${computerSelection} cuts ${humanSelection}!`)
+        resultTracker.textContent = `You lose! ${computerSelection} cuts ${humanSelection}!`;
         console.log("Lose")
-        computerScore++;
+        
     } else if (humanSelection == "scissors" && computerSelection == "rock"){
-        alert(`You lose! ${computerSelection} smashes ${humanSelection}!`)
+        resultTracker.textContent = `You lose! ${computerSelection} smashes ${humanSelection}!`;
         console.log("Lose");
-        computerScore++;
+        
     } else if (humanSelection == "scissors" && computerSelection == "paper"){
-        alert(`You win! ${humanSelection} cuts ${computerSelection}!`)
+        resultTracker.textContent = `You win! ${humanSelection} cuts ${computerSelection}!`;
         console.log("Win");
-        humanScore++;
+        
     } else {alert("something has gone horribly wrong, try again!")}
 }
 
@@ -78,10 +87,6 @@ function evalWinner(){
 }
     
 //Event listeners for buttons
-const rockBtn = document.getElementById("rock");
-const paperBtn = document.getElementById("paper");
-const scissorsBtn = document.getElementById("scissors");
-
-rockBtn.addEventListener("click", playRound);
-paperBtn.addEventListener("click", playRound);
-scissorsBtn.addEventListener("click", playRound);
+document.getElementById("rock").addEventListener("click", getHumanChoice);
+document.getElementById("paper").addEventListener("click", getHumanChoice);
+document.getElementById("scissors").addEventListener("click", getHumanChoice);
